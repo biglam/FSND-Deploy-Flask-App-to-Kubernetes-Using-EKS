@@ -1,9 +1,8 @@
-FROM python:stretch
+FROM python:3-stretch
 
 COPY . /app
 WORKDIR /app
 
-RUN echo 'python 279'
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
