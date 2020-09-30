@@ -16,6 +16,7 @@
           # Command for specific kubectl version:
         - curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.17.0/bin/linux/amd64/kubectl
         - chmod +x ./kubectl ./aws-iam-authenticator
+        - echo `ls`
         - echo `kubectl version`
         - export PATH=$PWD/:$PATH
         - python -m pip install --upgrade --force pip
@@ -34,7 +35,7 @@
       commands:
         - docker push $REPOSITORY_URI:$TAG
         - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --role-arn $EKS_KUBECTL_ROLE_ARN
-        - kubectl apply -f simple_jwt_api.yml 
+        - ./kubectl apply -f simple_jwt_api.yml 
         - printf '[{"name":"simple_jwt_api","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json
   artifacts:
     files: build.json
